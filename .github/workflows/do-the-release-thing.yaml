@@ -40,7 +40,6 @@ jobs:
       - name: Rename JS File to Release Name 
         run: | 
           mv main.js ${{steps.tagName.outputs.tag}}.js
-          mv ${{steps.tagName.outputs.tag}}.js
 
       - name: Upload built HTML
         uses: actions/upload-pages-artifact@v1
