@@ -41,10 +41,6 @@ jobs:
         run: | 
           mv main.js ${{steps.tagName.outputs.tag}}.js
 
-      - name: Upload built HTML
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: "./pages"
           
       - name: Switch Branch and Stage Changes
         run: git checkout hub; git add .
