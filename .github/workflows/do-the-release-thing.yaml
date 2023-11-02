@@ -32,9 +32,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: hub
-          sparse-checkout: |
-            info.json
-            update.py
+          sparse-checkout: .
           sparse-checkout-cone-mode: false
 
       - name: Scala to JS
@@ -56,6 +54,4 @@ jobs:
           python update.py info.json ${{steps.tagName.outputs.tag}}
           
       - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-           branch: hub
       
