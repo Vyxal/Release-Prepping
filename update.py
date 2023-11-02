@@ -5,7 +5,7 @@ filename = sys.argv[1]
 version = sys.argv[2]
 # Data to add to the JSON file
 data_to_add = {
-    "v" + version : "v" + version + ".js"
+    version : version + "/" + version + ".js"
 }
 
 # Load the existing data from the JSON file, if it exists
