@@ -46,11 +46,12 @@ jobs:
           ref: hub
           sparse-checkout: |
             info.json
+            update.py
           sparse-checkout-cone-mode: false
           
       - name: Update the releases file
         run: |
-          python update_release info.json ${{steps.tagName.outputs.tag}}
+          python update.py info.json ${{steps.tagName.outputs.tag}}
           
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
