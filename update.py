@@ -1,8 +1,8 @@
 import json
 import sys
 
-filename = sys.argv[0]
-version = sys.argv[1]
+filename = sys.argv[1]
+version = sys.argv[2]
 # Data to add to the JSON file
 data_to_add = {
     "v" + version : "v" + version + ".js"
