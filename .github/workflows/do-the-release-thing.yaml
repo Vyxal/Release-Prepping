@@ -38,7 +38,7 @@ jobs:
         
       - name: Rename JS File to Release Name 
         run: | 
-          mv main.js ${{steps.tagName.outputs.tag}}.js
+          mv main.js  ${{steps.tagName.outputs.tag}}/${{steps.tagName.outputs.tag}}.js
 
       - uses: actions/checkout@v4
         with:
