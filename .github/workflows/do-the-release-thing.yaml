@@ -29,6 +29,14 @@ jobs:
       #    java-version: "17"
       #    distribution: "adopt"
 
+      - uses: actions/checkout@v4
+        with:
+          ref: hub
+          sparse-checkout: |
+            info.json
+            update.py
+          sparse-checkout-cone-mode: false
+
       - name: Scala to JS
         # run: ./mill js.fullLinkJS
         run: touch main.js
@@ -38,15 +46,10 @@ jobs:
         
       - name: Rename JS File to Release Name 
         run: | 
+          mkdir ${{steps.tagName.outputs.tag}}
           mv main.js  ${{steps.tagName.outputs.tag}}/${{steps.tagName.outputs.tag}}.js
 
-      - uses: actions/checkout@v4
-        with:
-          ref: hub
-          sparse-checkout: |
-            info.json
-            update.py
-          sparse-checkout-cone-mode: false
+
           
       - name: Update the releases file
         run: |
