@@ -11,7 +11,7 @@ data_to_add = {
 # Load the existing data from the JSON file, if it exists
 try:
     with open(filename, "r") as file:
-        existing_data = json.load(file)
+        existing_data = json.load(file.read())
 except FileNotFoundError:
     existing_data = {}
 
