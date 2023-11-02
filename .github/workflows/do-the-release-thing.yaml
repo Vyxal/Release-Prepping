@@ -32,9 +32,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: hub
-          sparse-checkout: .
-          sparse-checkout-cone-mode: false
-
+          sparse-checkout: |
+           .
+           ./.
+           update.py
+           info.json
       - name: Scala to JS
         # run: ./mill js.fullLinkJS
         run: touch main.js
