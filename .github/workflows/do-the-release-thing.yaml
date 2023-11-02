@@ -40,7 +40,6 @@ jobs:
         run: | 
           mv main.js ${{steps.tagName.outputs.tag}}.js
 
-      - name: Get the release json file
       - uses: actions/checkout@v4
         with:
           ref: hub
