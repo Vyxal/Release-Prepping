@@ -39,6 +39,18 @@ jobs:
       - name: Rename JS File to Release Name 
         run: | 
           mv main.js ${{steps.tagName.outputs.tag}}.js
+
+      - name: Get the release json file
+      - uses: actions/checkout@v4
+        with:
+          ref: hub
+          sparse-checkout: |
+            info.json
+          sparse-checkout-cone-mode: false
+          
+      - name: Update the releases file
+        run: |
+          python update_release info.json ${{steps.tagName.outputs.tag}}
           
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
