@@ -11,11 +11,11 @@ data_to_add = {
 # Load the existing data from the JSON file, if it exists
 try:
     with open(filename, "r") as file:
+        print("Opened the file")
         existing_data = json.load(file)
 except FileNotFoundError:
     existing_data = {}
 
-print(existing_data)
 # Update the existing data with the new data
 existing_data.update(data_to_add)
 
