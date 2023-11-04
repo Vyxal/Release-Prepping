@@ -1,9 +1,8 @@
 name: Create release from tag
 
 on:
-  push:
-    tags:
-      - "v3*"
+  repository_dispatch:
+    types: [vyxal3-release]
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
