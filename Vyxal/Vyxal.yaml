@@ -1,0 +1,18 @@
+name: Send message to release prerpping
+on:
+  push:
+    tags:
+      "v3.*"
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: olegtarasov/get-tag@v2.1.2
+        id: tagName
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PAT }}
+          repository: vyxal/Release-Prepping
+          event-type: vyxal3-release
+          client-payload: '{"tag": "${{ steps.tagName.outputs.tag }}"}'
