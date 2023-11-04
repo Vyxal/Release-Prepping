@@ -46,7 +46,7 @@ jobs:
       - name: Rename JS File to Release Name 
         run: | 
           mkdir ${{github.event.client_payload.tag}}
-          mv !(${{github.event.client_payload.tag}})  ${{github.event.client_payload.tag}}
+          mv * ${{github.event.client_payload.tag}} 2>dev/null
           
       - uses: stefanzweifel/git-auto-commit-action@v5
       
