@@ -41,7 +41,7 @@ jobs:
       - name: Rename JS File to Release Name 
         run: | 
           mkdir ${{github.event.client_payload.tag}}
-          git clone Vyxal/vyxal.github.io ${{github.event.client_payload.tag}}
+          git clone https://github.com/Vyxal/vyxal.github.io.git ${{github.event.client_payload.tag}}
           mv vyxal.js ${{github.event.client_payload.tag}}/src
           
           
