@@ -28,20 +28,25 @@ jobs:
       #    java-version: "17"
       #    distribution: "adopt"
 
+      
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          
       - uses: actions/checkout@v4
         with:
           ref: hub
-      - name: Scala to JS
-        # run: ./mill js.fullLinkJS
-        run: touch main.js
+          
+      - name: Download the javascript source
+        run: curl https://vyxal.github.io/Vyxal/vyxal.js > vyxal.js
         
       - uses: olegtarasov/get-tag@v2.1.2
         id: tagName
         
       - name: Rename JS File to Release Name 
         run: | 
-          mkdir ${{steps.tagName.outputs.tag}}
-          mv main.js  ${{steps.tagName.outputs.tag}}/${{steps.tagName.outputs.tag}}.js
+          mkdir ${{github.event.client_payload.tag}}
+          mv vyxal.js  ${{github.event.client_payload.tag}}/vyxal.js  
           
       - uses: stefanzweifel/git-auto-commit-action@v5
       
