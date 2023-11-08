@@ -1,9 +1,9 @@
 import sys
-import json
+import ast
 import requests
 
 if __name__ == "__main__":
-  files = eval(sys.argv[1])
+  files = ast.literal_eval(sys.argv[1])
   print(files)
   directory = sys.argv[2]
 
