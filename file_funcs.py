@@ -3,7 +3,7 @@ import json
 import requests
 
 if __name__ == "__main__":
-  files = json.loads(sys.argv[1])
+  files = eval(sys.argv[1])
   print(files)
   directory = sys.argv[2]
 
