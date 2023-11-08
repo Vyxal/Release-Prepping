@@ -1,0 +1,81 @@
+name: Create release from tag
+
+on:
+  repository_dispatch:
+    types: [vyxal3-release]
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "release"
+  cancel-in-progress: true
+
+jobs:
+  # This goes in the website
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      #- name: Set up JDK 17
+      #  uses: actions/setup-java@v3
+      #  with:
+      #    java-version: "17"
+      #    distribution: "adopt"
+          
+      - uses: actions/checkout@v4
+        with:
+          ref: hub
+        
+      - name: Download files to release folder
+        run: | 
+          python -m pip install --upgrade pip
+          python -m pip install requests
+          mkdir ${{github.event.client_payload.tag}}
+          git clone https://github.com/Vyxal/vyxal.github.io.git ${{github.event.client_payload.tag}}
+          python file_funcs.py "${{toJSON(github.event.client_payload.files)}}" ${{github.event.client_payload.tag}}
+          cd ${{github.event.client_payload.tag}}
+          rm -rfd .git
+          
+          
+      - uses: stefanzweifel/git-auto-commit-action@v5
+
+deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Set up Node.js 19
+        uses: actions/setup-node@v3
+        with:
+          node-version: 19
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build
+        env:
+          NODE_ENV: "production"
+
+      - name: Upload built HTML
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+      
