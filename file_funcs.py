@@ -4,6 +4,7 @@ import requests
 
 if __name__ == "__main__":
   files = json.loads(argv[1])
+  print(files)
   directory = argv[2]
 
   for file in files:
