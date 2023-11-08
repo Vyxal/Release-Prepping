@@ -32,8 +32,8 @@ jobs:
         with:
           ref: hub
           
-      - name: Download the javascript source
-        run: curl https://vyxal.github.io/Vyxal/vyxal.js > vyxal.js
+      - name: Download the javascript files
+        run: python get_files.py "${{github.event.client_payload.files}}"
         
       - uses: olegtarasov/get-tag@v2.1.2
         id: tagName
