@@ -31,19 +31,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: hub
-          
-      - name: Download the javascript files
-        run: python get_files.py "${{github.event.client_payload.files}}"
+
         
       - uses: olegtarasov/get-tag@v2.1.2
         id: tagName
         
-      - name: Rename JS File to Release Name 
+      - name: Download files to release folder
         run: | 
           mkdir ${{github.event.client_payload.tag}}
           git clone https://github.com/Vyxal/vyxal.github.io.git ${{github.event.client_payload.tag}}
-          mv vyxal.js ${{github.event.client_payload.tag}}/src
+          python file_funcs.py "${{github.event.client_payload.files}}" ${{github.event.client_payload.tag}}
           cd ${{github.event.client_payload.tag}}
+          mv vyxal.js src
           rm -rfd .git
           
           
