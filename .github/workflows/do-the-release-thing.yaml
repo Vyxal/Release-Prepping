@@ -38,12 +38,11 @@ jobs:
         
       - name: Download files to release folder
         run: | 
-          echo "${{toJSON(github.event.client_payload.files)}}"
           python -m pip install --upgrade pip
           python -m pip install requests
           mkdir ${{github.event.client_payload.tag}}
           git clone https://github.com/Vyxal/vyxal.github.io.git ${{github.event.client_payload.tag}}
-          python file_funcs.py "${{github.event.client_payload.files}}" ${{github.event.client_payload.tag}}
+          python file_funcs.py "${{toJSON(github.event.client_payload.files)}}" ${{github.event.client_payload.tag}}
           cd ${{github.event.client_payload.tag}}
           rm -rfd .git
           
