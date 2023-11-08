@@ -37,7 +37,7 @@ jobs:
         id: tagName
 
       - name: Echo the thing
-        run: echo "${{fromJSON(github.event.client_payload.files)}}
+        run: echo "${{toJSON(github.event.client_payload.files)}}
         
       - name: Download files to release folder
         run: | 
