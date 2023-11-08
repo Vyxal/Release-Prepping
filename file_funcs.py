@@ -3,9 +3,9 @@ import json
 import requests
 
 if __name__ == "__main__":
-  files = json.loads(argv[1])
+  files = json.loads(sys.argv[1])
   print(files)
-  directory = argv[2]
+  directory = sys.argv[2]
 
   for file in files:
     res = requests.get("https://vyxal.github.io/Vyxal/" + file)
