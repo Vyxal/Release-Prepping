@@ -4,7 +4,7 @@ import requests
 
 if __name__ == "__main__":
   print("sys.argv is ", sys.argv)
-  files = eval(sys.argv[1])
+  files = sys.argv[1].split(" !! ")
   directory = sys.argv[2]
 
   for file in files:
