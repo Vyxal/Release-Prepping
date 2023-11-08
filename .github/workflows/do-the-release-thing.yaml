@@ -31,13 +31,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: hub
-
-        
-      - uses: olegtarasov/get-tag@v2.1.2
-        id: tagName
-
-      - name: Echo the thing
-        run: echo "${{toJSON(github.event.client_payload.files)}}
         
       - name: Download files to release folder
         run: | 
