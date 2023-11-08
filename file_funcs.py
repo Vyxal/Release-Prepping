@@ -3,8 +3,8 @@ import ast
 import requests
 
 if __name__ == "__main__":
-  files = ast.literal_eval(sys.argv[1])
-  print(files)
+  print(sys.argv[1])
+  files = eval(sys.argv[1])
   directory = sys.argv[2]
 
   for file in files:
