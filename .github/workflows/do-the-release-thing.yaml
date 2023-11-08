@@ -35,6 +35,9 @@ jobs:
         
       - uses: olegtarasov/get-tag@v2.1.2
         id: tagName
+
+      - name: Echo the thing
+        run: echo "${{fromJSON(github.event.client_payload.files)}}
         
       - name: Download files to release folder
         run: | 
